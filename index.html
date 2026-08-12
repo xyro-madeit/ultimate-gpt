@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>AI Signal Lab</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">AI SIGNAL LAB</div>
+      <h1>Multi-signal AI writing analysis.</h1>
+      <p>Runs 120 local stylometric signals and can merge results from any external detector APIs you configure.</p>
+    </section>
+
+    <section class="panel input-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Analyze text</h2>
+          <p>Paste at least a few sentences for a more useful result.</p>
+        </div>
+        <div class="count"><span id="wordCount">0</span> words</div>
+      </div>
+      <textarea id="textInput" spellcheck="true" placeholder="Paste writing here..."></textarea>
+      <div class="actions">
+        <button id="analyzeBtn" class="primary">Analyze writing</button>
+        <button id="clearBtn" class="ghost">Clear</button>
+      </div>
+      <div id="errorBox" class="error hidden"></div>
+    </section>
+
+    <section id="emptyState" class="panel empty-state">
+      <div class="orb"></div>
+      <h3>No analysis yet</h3>
+      <p>Your results will appear here only when the checker finds meaningful AI-like signals.</p>
+    </section>
+
+    <section id="results" class="hidden">
+      <section class="score-grid">
+        <article class="score-card panel">
+          <div class="score-label">Combined likelihood</div>
+          <div class="score-line"><span id="overallScore">0</span><small>%</small></div>
+          <div class="meter"><div id="meterFill" class="meter-fill"></div></div>
+          <p id="verdict"></p>
+        </article>
+        <article class="panel stat-card"><span>Signals run</span><strong id="signalCount">120</strong><small>local + external</small></article>
+        <article class="panel stat-card"><span>Flagged passages</span><strong id="flaggedCount">0</strong><small>click to inspect</small></article>
+        <article class="panel stat-card"><span>External sources</span><strong id="externalCount">0</strong><small>configured APIs</small></article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div><h2>Where & why</h2><p>Click a highlighted passage to see the strongest reason it was flagged.</p></div></div>
+        <div id="annotatedText" class="annotated"></div>
+        <div id="reasonPanel" class="reason-panel hidden"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div><h2>Top 25 flags</h2><p>Gross score = raw score from that checker/signal before ensemble calibration.</p></div></div>
+        <div id="flagsList" class="flags-list"></div>
+      </section>
+
+      <section id="externalSection" class="panel hidden">
+        <div class="panel-head"><div><h2>External checker results</h2><p>Only real API responses are shown here.</p></div></div>
+        <div id="externalList" class="flags-list"></div>
+      </section>
+
+      <section class="fineprint">
+        AI-text detection is probabilistic and can produce false positives, especially on edited, formal, short, or non-native writing. Do not use this score as proof of authorship or misconduct.
+      </section>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
