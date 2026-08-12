@@ -48,3 +48,6 @@ You can configure up to 40 external APIs per request in the starter. Raise that 
 
 ## About “100+ sources”
 The bundled app runs 120 local models/signals. It does **not** falsely claim those are 120 independent commercial AI-checker companies. Real external sources only appear when their APIs actually respond.
+
+## Vercel deployment note
+The `/api/analyze.js` endpoint is auto-detected by Vercel as a Node.js Function. `vercel.json` intentionally does not include a `functions` override, because this project does not need a custom function duration and omitting that override avoids unmatched-function-pattern deployment errors.
